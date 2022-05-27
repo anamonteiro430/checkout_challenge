@@ -1,17 +1,33 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import PersonalInfo from "./components/PersonalInfo/PersonalInfo";
+import React, { useEffect, useReducer } from "react";
+import {
+  CheckoutContext,
+  initialState,
+  reducer,
+} from "./reducers/checkoutReducer";
+import CheckoutScreen from "./screens/CheckoutScreen/CheckoutScreen";
+import SuccessScreen from "./screens/SuccessScreen/SuccessScreen";
+import { isFormFilled } from "./utils/functions";
 
 export default function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { isBooking } = state;
+
+  useEffect(() => {
+    if (!isBooking) {
+      if (isFormFilled(state.userInfo)) {
+        dispatch({ type: "CAN_BOOK" });
+      } else {
+        dispatch({ type: "CANT_BOOK" });
+      }
+    }
+  }, [state.userInfo]);
+
   return (
-    <View style={styles.container}>
-      <PersonalInfo />
-    </View>
+    <CheckoutContext.Provider
+      value={{ checkoutState: state, checkoutDispatch: dispatch }}
+    >
+      <CheckoutScreen />
+      <SuccessScreen />
+    </CheckoutContext.Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
