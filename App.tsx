@@ -1,24 +1,20 @@
 import React, { useEffect, useReducer } from "react";
+import CheckoutScreen from "./src/screens/CheckoutScreen/CheckoutScreen";
+import SuccessScreen from "./src/screens/SuccessScreen/SuccessScreen";
+import { isFormFilled } from "./src/utils/functions";
 import {
   CheckoutContext,
   initialState,
   reducer,
-} from "./reducers/checkoutReducer";
-import CheckoutScreen from "./screens/CheckoutScreen/CheckoutScreen";
-import SuccessScreen from "./screens/SuccessScreen/SuccessScreen";
-import { isFormFilled } from "./utils/functions";
+} from "./src/reducers/checkoutReducer";
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { isBooking } = state;
+  const { states, steps } = state;
 
   useEffect(() => {
-    if (!isBooking) {
-      if (isFormFilled(state.userInfo)) {
-        dispatch({ type: "CAN_BOOK" });
-      } else {
-        dispatch({ type: "CANT_BOOK" });
-      }
+    if (!states.isBooking) {
+      dispatch({ type: "CAN_BOOK", payload: isFormFilled(state.userInfo) });
     }
   }, [state.userInfo]);
 
@@ -26,8 +22,7 @@ export default function App() {
     <CheckoutContext.Provider
       value={{ checkoutState: state, checkoutDispatch: dispatch }}
     >
-      <CheckoutScreen />
-      <SuccessScreen />
+      {steps.showSuccessPage ? <SuccessScreen /> : <CheckoutScreen />}
     </CheckoutContext.Provider>
   );
 }

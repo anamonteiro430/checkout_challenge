@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import { Text, Button } from "react-native";
 import { CheckoutContext } from "../../reducers/checkoutReducer";
 import {
   BagPickerContainer,
   BagsContainer,
-  BagPickerSubtitle,
-  BagPickerTitle,
+  BagsTitle,
+  NumberOfProducts,
+  PickerButton,
+  PickerText,
 } from "./BagPicker.style";
 
 const BagPicker = () => {
@@ -14,24 +15,25 @@ const BagPicker = () => {
   const { products } = checkoutState;
 
   return (
-    <BagPickerContainer>
-      <BagPickerSubtitle>Booking storage at:</BagPickerSubtitle>
-      <BagPickerTitle>Cody's Cookie Store</BagPickerTitle>
-      <BagsContainer>
-        <Text>Number of bags</Text>
-        <Button
-          title="-"
+    <BagsContainer>
+      <BagsTitle>Number of bags</BagsTitle>
+      <BagPickerContainer>
+        <PickerButton
+          disabled={products.length === 1}
           onPress={() =>
             checkoutContext.checkoutDispatch({ type: "REMOVE_BAG" })
           }
-        ></Button>
-        <Text>{products.length}</Text>
-        <Button
-          title="+"
+        >
+          <PickerText>-</PickerText>
+        </PickerButton>
+        <NumberOfProducts>{products.length}</NumberOfProducts>
+        <PickerButton
           onPress={() => checkoutContext.checkoutDispatch({ type: "ADD_BAG" })}
-        ></Button>
-      </BagsContainer>
-    </BagPickerContainer>
+        >
+          <PickerText>+</PickerText>
+        </PickerButton>
+      </BagPickerContainer>
+    </BagsContainer>
   );
 };
 

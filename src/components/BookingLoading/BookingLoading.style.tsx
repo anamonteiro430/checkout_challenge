@@ -4,15 +4,19 @@ export const BookingLoadingContainer = styled.TouchableOpacity`
   flex: 1;
   border: 1px solid;
   position: absolute;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
-  opacity: 0.4;
   display: flex;
   align-items: center;
   justify-content: center;
+  top: 0;
 `;
 
 export const BookingLoadingText = styled.Text`
-  background-color: white;
+  color: white;
+  font-size: 28px;
+  line-height: 33px;
+  font-weight: 700;
+  text-align: center;
 `;

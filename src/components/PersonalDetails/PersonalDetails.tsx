@@ -1,43 +1,58 @@
 import React, { useContext } from "react";
-import { Button, TextInput } from "react-native";
 import { CheckoutContext } from "../../reducers/checkoutReducer";
 import {
   PersonalDetailsContainer,
+  PersonalDetailsInput,
+  PersonalDetailsLabel,
   PersonalDetailsLocked,
+  PersonalDetailsLockedContainer,
+  PersonalDetailsLockedText,
+  PersonalDetailsTitle,
 } from "./PersonalDetails.style";
 
 const PersonalDetails = () => {
   const checkoutContext = useContext(CheckoutContext);
   const { checkoutState, checkoutDispatch } = checkoutContext;
-  const { isPersonalDetailsLocked } = checkoutState;
+  const { states } = checkoutState;
 
-  if (isPersonalDetailsLocked) {
+  if (states.isPersonalDetailsLocked) {
     return (
       <PersonalDetailsLocked>
-        <Button
-          title={"change"}
-          onPress={() => checkoutDispatch({ type: "UNLOCK_PERSONAL_DETAILS" })}
-        />
+        <PersonalDetailsLockedContainer>
+          <PersonalDetailsLockedText>
+            Personal Details:
+          </PersonalDetailsLockedText>
+          <PersonalDetailsLockedText
+            onPress={() =>
+              checkoutDispatch({
+                type: "UNLOCK_PERSONAL_DETAILS",
+              })
+            }
+          >
+            change?
+          </PersonalDetailsLockedText>
+        </PersonalDetailsLockedContainer>
       </PersonalDetailsLocked>
     );
   } else
     return (
       <PersonalDetailsContainer>
-        <TextInput
+        <PersonalDetailsTitle>Personal Details:</PersonalDetailsTitle>
+        <PersonalDetailsLabel>Name</PersonalDetailsLabel>
+
+        <PersonalDetailsInput
           onChangeText={(name) =>
             checkoutDispatch({ type: "CHANGING_INFO", payload: { name } })
           }
           value={checkoutState.userInfo.name}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
         />
-        <TextInput
+        <PersonalDetailsLabel>Email</PersonalDetailsLabel>
+
+        <PersonalDetailsInput
           onChangeText={(email) =>
             checkoutDispatch({ type: "CHANGING_INFO", payload: { email } })
           }
           value={checkoutState.userInfo.email}
-          placeholder="useless placeholder"
-          keyboardType="numeric"
         />
       </PersonalDetailsContainer>
     );

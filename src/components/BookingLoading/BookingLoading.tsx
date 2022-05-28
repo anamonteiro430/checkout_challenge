@@ -7,7 +7,12 @@ import {
 const BookingLoading = () => {
   return (
     <BookingLoadingContainer>
-      <BookingLoadingText>Placing Booking</BookingLoadingText>
+      <BookingLoadingText>
+        Placing
+        {"\n"} Booking
+        {"\n"}
+        ...
+      </BookingLoadingText>
     </BookingLoadingContainer>
   );
 };

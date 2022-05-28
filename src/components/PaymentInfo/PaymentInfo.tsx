@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
-import { TextInput } from "react-native";
 import { CheckoutContext } from "../../reducers/checkoutReducer";
-import { PaymentInfoContainer } from "./PaymentInfo.style";
+import {
+  PaymentInfoContainer,
+  PaymentInfoInput,
+  PaymentInfoLabel,
+  PaymentInfoTitle,
+} from "./PaymentInfo.style";
 
 const PaymentInfo = () => {
   const checkoutContext = useContext(CheckoutContext);
@@ -9,12 +13,17 @@ const PaymentInfo = () => {
 
   return (
     <PaymentInfoContainer>
-      <TextInput
+      <PaymentInfoTitle>Payment Information</PaymentInfoTitle>
+      <PaymentInfoLabel>Card Details</PaymentInfoLabel>
+
+      <PaymentInfoInput
         onChangeText={(card) =>
+          /\d/.test(card) &&
           checkoutDispatch({ type: "CHANGING_INFO", payload: { card } })
         }
         value={checkoutState.userInfo.card}
-        placeholder="placeholder"
+        keyboardType="numeric"
+        maxLength={10}
       />
     </PaymentInfoContainer>
   );
