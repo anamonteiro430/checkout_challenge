@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 
 export const CheckoutContainer = styled.View`
   padding: 44px 0 0;
-  height: 100%;
+  flex: 1;
 `;
 
 export const CheckoutHeader = styled.View`

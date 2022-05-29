@@ -2,7 +2,6 @@ import styled from "styled-components/native";
 import { errorColor, primaryColor } from "../../utils/colors";
 
 export const FooterContainer = styled.View`
-  position: absolute;
   bottom: 0px;
   width: 100%;
   display: flex;
@@ -12,6 +11,7 @@ export const FooterContainer = styled.View`
   padding: 24px;
   border-top-color: black;
   border-top-width: 1px;
+  background: white;
 `;
 
 export const Total = styled.View``;

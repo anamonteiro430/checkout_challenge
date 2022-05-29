@@ -11,6 +11,7 @@ import {
   CheckoutSubtitle,
   CheckoutTitle,
 } from "./CheckoutScreen.style";
+import { ScrollView } from "react-native";
 
 const CheckoutScreen = () => {
   const checkoutContext = useContext(CheckoutContext);
@@ -19,13 +20,15 @@ const CheckoutScreen = () => {
 
   return (
     <CheckoutContainer>
-      <CheckoutHeader>
-        <CheckoutSubtitle>Booking storage at:</CheckoutSubtitle>
-        <CheckoutTitle>Cody's Cookie Store</CheckoutTitle>
-      </CheckoutHeader>
-      <BagPicker />
-      {steps.showPersonalDetails && <PersonalDetails />}
-      {steps.showPaymentInformation && <PaymentInfo />}
+      <ScrollView>
+        <CheckoutHeader>
+          <CheckoutSubtitle>Booking storage at:</CheckoutSubtitle>
+          <CheckoutTitle>Cody's Cookie Store</CheckoutTitle>
+        </CheckoutHeader>
+        <BagPicker />
+        {steps.showPersonalDetails && <PersonalDetails />}
+        {steps.showPaymentInformation && <PaymentInfo />}
+      </ScrollView>
       <Footer />
       {states.isBooking && <BookingLoading />}
     </CheckoutContainer>

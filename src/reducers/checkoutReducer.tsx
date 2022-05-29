@@ -131,7 +131,7 @@ export function reducer(state: State, action: { type: string; payload?: any }) {
         ...state,
         states: {
           ...state.states,
-          isBooking: true,
+          isBooking: false,
           bookingFailed: true,
         },
       };
