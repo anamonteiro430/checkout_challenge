@@ -1,6 +1,10 @@
-Checkout flow concept implemented with React Native Web ❤️
+## Checkout flow concept implemented with React Native Web ❤️
 
-To run:
+## Demo: https://cool-checkout-challenge.netlify.app/
+
+<br>
+
+## To run:
 
 - Clone repo
 - `npm install`
@@ -13,4 +17,4 @@ To run:
 
 ## Notes:
 
-### There's 50/50 chance the checkout flow will fail. If it does retry!
+### There's 50/50 chance the checkout flow will fail. If it does, please retry!
